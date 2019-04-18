@@ -1,0 +1,46 @@
+﻿@using System.Activities.Statements
+@model IEnumerable<Test3.Models.Depo>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@Html.ActionLink("Add Record","Create",null,new {@class ="btn btn-outline-primary"})
+<br />
+<br />
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">
+              <b>#</b>
+            </th>
+            <th>
+                <b>@Html.DisplayNameFor(aaaa => aaaa.Ad)</b>  
+            </th>
+            <th>
+                <b>Actions</b>  
+            </th>
+        </tr>
+    </thead>
+
+
+    @foreach (var item in Model)
+    {
+        <tbody>
+        <tr>
+            <th scope="row">
+                @Html.DisplayFor(xxxx => item.Id)
+            </th>
+            <td>
+                @Html.DisplayFor(xxxx => item.Ad)
+            </td>
+            <td>
+                @Html.ActionLink("Detail", "Detail", null, new { id = item.Id }, new { @class = "btn btn-primary btn-sm" }) |
+                @Html.ActionLink("Edit", "Edit", null, new { id = item.Id }, new { @class = "btn btn-warning btn-sm" }) |
+                @Html.ActionLink("Delete", "Delete", null, new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+            </td>
+        </tr>
+        </tbody>
+    }
+
+</table>
