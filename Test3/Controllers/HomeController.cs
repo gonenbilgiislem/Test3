@@ -33,11 +33,22 @@ namespace Test3.Controllers
             return View(depo);
         }
 
-        public ActionResult Edit()
+        public ActionResult Create()
         {
-           
-
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,Ad")]Depo depo)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Depo.Add(depo);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(depo);
         }
     }
 }
