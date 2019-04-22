@@ -18,8 +18,12 @@
             <b>@Html.DisplayNameFor(aaaa => aaaa.Ad)</b>  
         </th>
         <th>
+            <b>@Html.DisplayNameFor(aaaa => aaaa.Soyad)</b>  
+        </th>
+        <th>
             <b>Actions</b>  
         </th>
+
     </tr>
     </thead>
 
@@ -27,19 +31,23 @@
     @foreach (var item in Model)
     {
         <tbody>
-        <tr>
-            <th scope="row">
-                @Html.DisplayFor(xxxx => item.Id)
-            </th>
-            <td>
-                @Html.DisplayFor(xxxx => item.Ad)
-            </td>
-            <td>
-                @Html.ActionLink("Detail", "Detail", null, new { id = item.Id }, new { @class = "btn btn-primary btn-sm" }) |
-                @Html.ActionLink("Edit", "Edit", null, new { id = item.Id }, new { @class = "btn btn-warning btn-sm" }) |
-                @Html.ActionLink("Delete", "Delete", null, new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
-            </td>
-        </tr>
+            <tr>
+                <th scope="row">
+                    @Html.DisplayFor(xxxx => item.Id)
+                </th>
+                <td>
+                    @Html.DisplayFor(xxxx => item.Ad)
+                </td>
+                <td>
+                    @Html.DisplayFor(xxxx => item.Soyad)
+                </td>
+                <td>
+                    @Html.ActionLink("Detail", "Detail", null, new { id = item.Id }, new { @class = "btn btn-primary btn-sm" }) |
+                    @Html.ActionLink("Edit", "Edit", null, new { id = item.Id }, new { @class = "btn btn-warning btn-sm" }) |
+                        @Html.ActionLink("Delete", "Delete", null, new { id = item.Id }, new { @class = "btn btn-danger btn-@sm"})
+
+                </td>
+            </tr>
         </tbody>
     }
 

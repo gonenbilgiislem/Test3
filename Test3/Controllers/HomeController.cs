@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Runtime.Remoting.Messaging;
 using System.Web.Mvc;
 using Test3.Models;
 
@@ -10,9 +9,9 @@ namespace Test3.Controllers
     public class HomeController : Controller
     {
         private Model1 db = new Model1();
+
         public ActionResult Index()
         {
-             
             return View(db.Depo.ToList());
         }
 
@@ -20,14 +19,14 @@ namespace Test3.Controllers
         {
             if (id == null)
             {
-                new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             Depo depo = db.Depo.Find(id);
 
             if (depo == null)
             {
-                HttpNotFound();
+                return HttpNotFound();
             }
 
             return View(depo);
@@ -40,7 +39,7 @@ namespace Test3.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Ad")]Depo depo)
+        public ActionResult Create([Bind(Include = "Id,Ad,Soyad")]Depo depo)
         {
             if (ModelState.IsValid)
             {
@@ -49,6 +48,60 @@ namespace Test3.Controllers
                 return RedirectToAction("Index");
             }
             return View(depo);
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Depo depo = db.Depo.Find(id);
+            if (depo == null)
+            {
+                return HttpNotFound();
+            }
+            return View(depo);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Ad,Soyad")]Depo depo)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(depo).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(depo);
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Depo depo = db.Depo.Find(id);
+            if (depo == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(depo);
+        }
+        [HttpPost,ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+                Depo depo = db.Depo.Find(id);
+              //  db.Depo.Remove(depo);
+              db.Entry(depo).State = EntityState.Deleted; 
+              db.SaveChanges();
+              return View();
         }
     }
 }

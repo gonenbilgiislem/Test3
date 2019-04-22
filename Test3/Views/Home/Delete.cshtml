@@ -9,6 +9,14 @@
             <b>@Html.DisplayNameFor(xxxx => xxxx.Soyad) :</b>     @Html.DisplayFor(xxxx => xxxx.Soyad)
         </h6>
         <br />
-        @Html.ActionLink("Click Back", "Index", null, null, new { @class = "card-link" })
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" onclick="confirm('Are you sure you want to delete the record')"/> |
+                @Html.ActionLink("Click Back", "Index", null, null, new { @class = "btn btn-success" })
+            </div>
+        }
     </div>
 </div>

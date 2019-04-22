@@ -1,9 +1,5 @@
 ﻿using Faker;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 
 namespace Test3.Models
 {
@@ -15,7 +11,8 @@ namespace Test3.Models
             {
                 Depo depo = new Depo
                 {
-                    Ad = CompanyFaker.Name()
+                    Ad = CompanyFaker.Name(),
+                    Soyad = LocationFaker.Country()
                 };
                 model1.Depo.Add(depo);
             }
